@@ -1,0 +1,7 @@
+Financial Analysis
+---------------
+Profit: $22564198
+Total Months: 86
+Average P/L: $8311.105882352942
+Greatest Increase in Profits: $['Sep-16', '898241']
+Greatest Decrease in profits: $['Apr-10', '-728133']

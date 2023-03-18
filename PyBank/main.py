@@ -1,39 +1,62 @@
 import os
 import csv
 
-#import csv file 
+#Create empty variables
 monthcount = 0
 total = 0
-ltotal = 0
-ptotal = 0
+totalsum =0
+monthly_change_list = []
+
+#import csv file 
 budget_data = os.path.join('Resources', 'budget_data.csv')
 
+results = open('results.txt', 'w')
+#open csv file
 with open(budget_data,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
     header = next(csvreader)
+    firstrow = next(csvreader)
+    prevnet = int(firstrow[1])
+    monthcount = monthcount + 1
+    total  += prevnet
+#convert csvreader to a stored list
     budgetlist = list(csvreader)
-    #print(budgetlist)
+   
+#Loop through
     for row in budgetlist:
         monthcount = monthcount + 1
         total += int(row[1])
-        avg = total/monthcount
-        if int(row[1]) < 0:
-            ltotal += int(row[1])
-        if int(row[1]) > 0:
-            ptotal += int(row[1])
-        pchange = ((ptotal-total)/total)*100
-        lchange = ((ltotal - total)/total)*100
-        ttchange = ((pchange - lchange)/lchange)*100
+        monthly_change = prevnet - int(row[1])
+        prevnet = int(row[1])
+        monthly_change_list += [monthly_change]
+        maxchange = max(budgetlist)
+        minchange = min(budgetlist)
+    net_monthly_avg = sum(monthly_change_list)/len(monthly_change_list)
+    
     print('Total Months:', monthcount)
     print('Total Profits/Losses:', total)
-    print('Average of P/L:', avg)
-    print('Losses Total:', ltotal)
-    print('Profit Total:', ptotal)
-    print('Profit Change:', pchange)
-    print('Losses Change:', lchange)
-    print('Total Change:', ttchange)
+    print('Changes in P/L:', sum(monthly_change_list))
+    print('Average P/L:', net_monthly_avg )
+    print('Greatest increase:', maxchange)
+    print('Greatest Decrease:', minchange)
+
+results.write(f'Financial Analysis\n---------------\n')
+results.write(f'Profit: ${total}\n')
+results.write(f'Total Months: {monthcount}\n')
+results.write(f'Average P/L: ${net_monthly_avg}\n')
+results.write(f'Greatest Increase in Profits: ${maxchange}\n')
+results.write(f'Greatest Decrease in profits: ${minchange}')
+        
+
     
     
+    
+        
+
+    
+    
+    
+
  
 
 
