@@ -11,7 +11,7 @@ monthly_change_list = []
 budget_data = os.path.join('Resources', 'budget_data.csv')
 
 results = open('results.txt', 'w')
-#open csv file
+#open csv file and create variables that will store data as the average P/L is being calculated
 with open(budget_data,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
     header = next(csvreader)
@@ -22,7 +22,7 @@ with open(budget_data,'r') as csvfile:
 #convert csvreader to a stored list
     budgetlist = list(csvreader)
    
-#Loop through
+#Loop through budgetlist to find the total months, net total amount, changes in P/L and average of P/L, the greatest increase/decrease
     for row in budgetlist:
         monthcount = monthcount + 1
         total += int(row[1])
@@ -32,14 +32,14 @@ with open(budget_data,'r') as csvfile:
         maxchange = max(budgetlist)
         minchange = min(budgetlist)
     net_monthly_avg = sum(monthly_change_list)/len(monthly_change_list)
-    
+#print all of the calculations   
     print('Total Months:', monthcount)
     print('Total Profits/Losses:', total)
     print('Changes in P/L:', sum(monthly_change_list))
     print('Average P/L:', net_monthly_avg )
     print('Greatest increase:', maxchange)
     print('Greatest Decrease:', minchange)
-
+#write the report to a text file. 
 results.write(f'Financial Analysis\n---------------\n')
 results.write(f'Profit: ${total}\n')
 results.write(f'Total Months: {monthcount}\n')
