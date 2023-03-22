@@ -29,10 +29,10 @@ with open(budget_data,'r') as csvfile:
         monthly_change = int(row[1]) - prevnet
         prevnet = int(row[1])
         monthly_change_list += [monthly_change]
-        maxchange = max(monthly_change_list)
-        minchange = min(monthly_change_list)
-        maax = monthly_change_list.index(maxchange)
-        miin = monthly_change_list.index(minchange)
+    maxchange = max(monthly_change_list)
+    minchange = min(monthly_change_list)
+    maax = monthly_change_list.index(maxchange)
+    miin = monthly_change_list.index(minchange)
     net_monthly_avg = sum(monthly_change_list)/len(monthly_change_list)
 #print all of the calculations   
     print('Total Months:', monthcount)
