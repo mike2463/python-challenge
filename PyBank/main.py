@@ -21,6 +21,7 @@ with open(budget_data,'r') as csvfile:
     total  += prevnet
 #convert csvreader to a stored list
     budgetlist = list(csvreader)
+    
    
 #Loop through budgetlist to find the total months, net total amount, changes in P/L and average of P/L, the greatest increase/decrease
     for row in budgetlist:
@@ -33,7 +34,7 @@ with open(budget_data,'r') as csvfile:
     minchange = min(monthly_change_list)
     maax = monthly_change_list.index(maxchange)
     miin = monthly_change_list.index(minchange)
-    net_monthly_avg = sum(monthly_change_list)/len(monthly_change_list)
+    net_monthly_avg = round(sum(monthly_change_list)/len(monthly_change_list),2)
 #print all of the calculations   
     print('Total Months:', monthcount)
     print('Total Profits/Losses:', total)
